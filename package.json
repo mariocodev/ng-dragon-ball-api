@@ -3,8 +3,11 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
+    "start": "ng serve --port 4200 --proxy-config proxy.config.json --configuration=local",
+    "start:uat": "ng serve -o --configuration=staging",
+    "build": "ng build --configuration=production",
+    "build:dev": "ng build --configuration=development",
+    "build:uat": "ng build --configuration=staging",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:ng-dragon-ball-api": "node dist/ng-dragon-ball-api/server/server.mjs"
