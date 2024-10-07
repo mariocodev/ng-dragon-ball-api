@@ -8,6 +8,7 @@
     "build": "ng build --configuration=production",
     "build:dev": "ng build --configuration=development",
     "build:uat": "ng build --configuration=staging",
+    "build:prod": "ng build --configuration=production --base-href=/ng-dragon-ball-api/",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:ng-dragon-ball-api": "node dist/ng-dragon-ball-api/server/server.mjs"
