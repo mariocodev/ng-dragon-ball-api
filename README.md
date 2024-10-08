@@ -3,7 +3,7 @@
 1. [Features](#features)
 2. [Installation](#installation)
 
-Este proyecto es una prueba de concepto de cliente desde un framework para frontend, es decir, utiliza el [LocalStorage](https://itelisoft.com/como-utilizar-el-localstorage-en-angula/) del navegador para guardar sesiones o datos obtenidos del backend a través del service.
+Este proyecto es una prueba de concepto de uso de `Actions` a través de **Github Pages** desde un framework frontend, y utiliza el api de `https://web.dragonball-api.com/` para desplegar una aplicación web con funcionalidades de filtrado.
 
 ## Features
 
@@ -112,12 +112,7 @@ $ npm run build:uat --output-hashing=all
 ```
 > `--output-hashing=all` borra/renueva el caché del proyecto
 
-## SonarQube
-
-La aplicación está preparada para la inspección continua de la calidad del código, que proporciona métricas detalladas y análisis para asegurar la calidad del software a través de SonarQube.
-
 ## FAQ
 
 * [Working with Environments — The Stages of Development: Angular 17](https://alifrazansaputra.medium.com/working-with-environments-the-stages-of-development-angular-17-54f104990025)
-* [Support for Ivy #81 | ngx-store ](https://github.com/zoomsphere/ngx-store/issues/81#issuecomment-607012983)
 * [NPM node-sass](https://www.npmjs.com/package/node-sass)
