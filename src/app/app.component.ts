@@ -6,6 +6,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Character } from './shared/models/character.interface';
 import { DragonBallService } from './shared/services/dragon-ball.service';
 import { ApiResponse } from './shared/models/api-response.interface';
+import { environment } from '../environments/environment';
 
 @Component({
 	selector: 'app-root',
@@ -18,6 +19,8 @@ export class AppComponent {
 	characters: Character[] = [];
 	searchForm: FormGroup;
 	countCharacter: number = 0;
+
+	ENV: boolean = environment.production;
 
 	LIMIT_RESULT: number = 16;
 
