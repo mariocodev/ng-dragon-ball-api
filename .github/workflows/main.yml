@@ -22,17 +22,28 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Checkout
         uses: actions/checkout@v4
+
       # Node Setup
-      - name: Setup nodejs
+      - name: Setup Node.js
         uses: actions/setup-node@v4.0.4
         with:
           node-version: "22"
+
       # Install dependencies
       - name: Install deps
         run: npm i
+
+      # Generate environment.production.ts file dynamically
+      - name: Create environment.production.ts
+        run: |
+          echo "Generating production environment file"
+          mkdir -p src/environments
+          echo "export const environment = { production: true };" > src/environments/environment.production.ts
+          
       # Build app for production
       - name: Build app bundle
         run: npm run build:prod
+
       # Deploy to GitHub pages
       - name: Deploy to Pages
         uses: crazy-max/ghaction-github-pages@v4.0.0
