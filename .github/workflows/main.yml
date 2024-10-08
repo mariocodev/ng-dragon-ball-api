@@ -39,10 +39,10 @@ jobs:
           echo "Generating production environment file"
           mkdir -p src/environments
           echo "export const environment = { production: true };" > src/environments/environment.production.ts
-          
+
       # Build app for production
-      - name: Build app bundle
-        run: npm run build:prod
+      - name: Build for production
+        run: npm run build --configuration production
 
       # Deploy to GitHub pages
       - name: Deploy to Pages
