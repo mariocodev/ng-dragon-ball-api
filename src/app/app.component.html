@@ -1,15 +1,29 @@
 <nav class="py-2 bg-light border-bottom">
     <div class="container d-flex flex-wrap">
         <ul class="nav me-auto">
-            <li class="nav-item"><a href="#" class="nav-link link-dark px-2 active" aria-current="page">Home</a></li>
-            <li class="nav-item"><a href="#" class="nav-link link-dark px-2">Features</a></li>
-            <li class="nav-item"><a href="#" class="nav-link link-dark px-2">Pricing</a></li>
-            <li class="nav-item"><a href="#" class="nav-link link-dark px-2">FAQs</a></li>
-            <li class="nav-item"><a href="#" class="nav-link link-dark px-2">About</a></li>
+            <li class="nav-item">
+                <a href="#" class="nav-link link-dark px-2 active" aria-current="page">Home</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link link-dark px-2">Features</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link link-dark px-2">Pricing</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link link-dark px-2">FAQs</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link link-dark px-2">About</a>
+            </li>
         </ul>
         <ul class="nav">
-            <li class="nav-item"><a href="#" class="nav-link link-dark px-2">Login</a></li>
-            <li class="nav-item"><a href="#" class="nav-link link-dark px-2">Sign up</a></li>
+            <li class="nav-item">
+                <a href="#" class="nav-link link-dark px-2">Login</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link link-dark px-2">Sign up</a>
+            </li>
         </ul>
     </div>
 </nav>
@@ -18,12 +32,14 @@
         <a href="/" class="d-flex align-items-center mb-3 mb-lg-0 me-lg-auto text-dark text-decoration-none">
             <svg class="bi me-2" width="40" height="32">
                 <use xlink:href="#bootstrap"></use>
-            </svg> <span class="fs-4">Double header</span> </a>
+            </svg>
+            <span class="fs-4">Double header</span>
+        </a>
         <form class="col-12 col-lg-auto mb-3 mb-lg-0">
-            <input type="search" class="form-control" placeholder="Search..." aria-label="Search"> </form>
+            <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
+        </form>
     </div>
 </header>
-
 <!-- Fact 3 - Bootstrap Brain Component -->
 <section class="bg-light py-3 py-md-5">
     <div class="container">
@@ -69,91 +85,113 @@
     <div class="container">
         <div class="row justify-content-md-center">
             <div class="col-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
-                <form class="row mb-4 d-flex justify-content-end">
+				<form [formGroup]="searchForm" class="row mb-4 d-flex justify-content-end" (ngSubmit)="onSearch()">
 					<div class="col-xl-2 col-lg-6 col-md-4 col-12 mb-2 mb-lg-0">
-						<input class="form-control" type="text" placeholder="Nombre">
+						<input class="form-control" type="text" placeholder="Nombre" formControlName="name">
 					</div>
 					<div class="col-xl-2 col-lg-6 col-md-4 col-12 mb-2 mb-lg-0">
-						<select class="form-select">
+						<select class="form-select" formControlName="gender">
 							<option value="">Género</option>
-							<option value="male">Male</option>
-							<option value="female">Female</option>
+							<option value="Male">Male</option>
+							<option value="Female">Female</option>
+							<option value="Other">Other</option>
+							<option value="Unknown">Desconocido</option>
 						</select>
 					</div>
 					<div class="col-xl-2 col-lg-2 col-md-4 col-12 mb-2 mb-lg-0">
-						<select class="form-select">
+						<select class="form-select" formControlName="race">
 							<option value="">Raza</option>
-							<option value="1">1</option>
-							<option value="2">2</option>
-							<option value="3">3</option>
-							<option value="4">4</option>
-							<option value="5">5</option>
+							<option value="Saiyan">Saiyan</option>
+							<option value="Namekian">Namekian</option>
+							<option value="Human">Human</option>
+							<option value="Majin">Majin</option>
+							<option value="Frieza Race">Frieza Race</option>
+							<option value="Jiren Race">Jiren Race</option>
+							<option value="Android">Android</option>
+							<option value="God">God</option>
+							<option value="Angel">Angel</option>
+							<option value="Evil">Evil</option>
+							<option value="Unknown">Unknown</option>
+							<option value="Nucleico benigno">Nucleico benigno</option>
+							<option value="Nucleico">Nucleico</option>
 						</select>
 					</div>
 					<div class="col-xl-2 col-lg-2 col-md-4 col-12 mb-2 mb-lg-0">
-						<select class="form-select">
-							<option value="">Afiliación</option>
-							<option value="1">1</option>
-							<option value="2">2</option>
-							<option value="3">3</option>
-							<option value="4">4</option>
-							<option value="5">5</option>
+						<select class="form-select" formControlName="affiliation">
+							<option value="">Grupo</option>
+							<option value="Z Fighter">Z Fighter</option>
+							<option value="Red Ribbon Army">Red Ribbon Army</option>
+							<option value="Namekian Warrior">Namekian Warrior</option>
+							<option value="Freelancer">Freelancer</option>
+							<option value="Army of Frieza">Army of Frieza</option>
+							<option value="Other">Other</option>
+							<option value="Pride Troopers">Pride Troopers</option>
+							<option value="Assistant of Vermoud">Assistant of Vermoud</option>
+							<option value="Assistant of Beerus">Assistant of Beerus</option>
+							<option value="Villain">Villain</option>
 						</select>
 					</div>
 					<div class="col-xl-1 col-lg-3 col-md-4 col-12 mb-2 mb-lg-0">
-					<select class="form-select">
-						<option value="">Sort</option>
-						<option value="Newest">Newest</option>
-						<option value="Oldest">Oldest</option>
-					</select>
+						<select class="form-select" formControlName="sort">
+							<option value="">Sort</option>
+							<option value="Newest">Newest</option>
+							<option value="Oldest">Oldest</option>
+						</select>
+					</div>
+					<div class="col-xl-1 col-lg-3 col-md-4 col-12 mb-2 mb-lg-0">
+						<button type="submit" class="btn btn-primary">Buscar</button>
 					</div>
 				</form>
-
-				<hr class="w-50 mx-auto mb-5 mb-xl-9 border-dark-subtle">
-
-			</div>
+                <hr class="w-50 mx-auto mb-5 mb-xl-9 border-dark-subtle">
+            </div>
         </div>
     </div>
     <div class="container overflow-hidden">
         <div class="row gy-4 gy-md-5 gx-xl-6 gy-xl-6 gx-xxl-9 gy-xxl-9">
-
-            <div class="col-12 col-lg-4" *ngFor="let character of characters">
+            <div class="col-12 col-lg-3" *ngFor="let character of characters">
                 <article>
                     <div class="card border-0 bg-transparent">
-                        <figure class="card-img-top mb-4 overflow-hidden bsb-overlay-hover" style="background-image: url('{{character.image}}'); background-repeat: no-repeat;background-size: cover;background-position: center top;height: 20rem;background-color: aquamarine;"></figure>
+                        <figure class="card-img-top mb-4 overflow-hidden bsb-overlay-hover" 
+						style="background-image: url('{{character.image}}'); background-repeat: no-repeat;background-size: cover;background-position: center top;height: 20rem;background-color: #f8f9fa;"
+						></figure>
                         <div class="card-body m-0 p-0">
                             <div class="entry-header mb-3">
                                 <ul class="entry-meta list-unstyled d-flex mb-3">
-                                    <li class="mx-2"> <a class="d-inline-flex px-2 py-1 link-primary text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-2 text-decoration-none fs-7" href="#!">{{character.race}}</a> </li>
-                                    <li> <span class="d-inline-flex px-2 py-1 link-primary text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-2 text-decoration-none fs-7" href="#!">{{character.gender}}</span> </li>
+                                    <li class="mx-2">
+                                        <a class="d-inline-flex px-2 py-1 link-primary text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-2 text-decoration-none fs-7" href="#!">{{character.race}}</a>
+                                    </li>
+                                    <li>
+                                        <span class="d-inline-flex px-2 py-1 link-primary text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-2 text-decoration-none fs-7" 
+										[ngClass]=" 'gender-'+character.gender | lowercase" href="#!">
+                                            <i class="bi " [ngClass]=" 'bi-gender-'+character.gender | lowercase"></i>
+                                        </span>
+                                    </li>
                                 </ul>
                                 <h2 class="card-title entry-title h4 m-0">
-									<a class="link-dark text-decoration-none" href="#!">{{character.name}}</a>
-								</h2>
+                                    <a class="link-dark text-decoration-none" href="#!">{{character.name}}</a>
+                                </h2>
                             </div>
                         </div>
                         <div class="card-footer border-0 bg-transparent p-0 m-0">
-							<div class="border-top row mt-0 border-bottom mb-3 g-0">
-								<div class="col">
-								  <div class="pe-1 ps-2 py-3">
-									<h5 class="mb-0">{{character.ki}}</h5>
-									<span class="text-muted">Poder</span>
-								  </div>
-								</div>
-								<div class="col border-start">
-								  <div class="pe-1 ps-3 py-3">
-									<h5 class="mb-0">{{character.maxKi}}</h5>
-									<span class="text-muted">Máximo poder</span>
-								  </div>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-12 text-truncate">
-									{{character.description}}
-								</div>
-							</div>
-							
-							  
+                            <div class="border-top row mt-0 border-bottom mb-3 g-0">
+                                <div class="col">
+                                    <div class="pe-1 ps-2 py-3">
+                                        <h5 class="mb-0">{{character.ki}}</h5>
+                                        <span class="text-muted">Poder</span>
+                                    </div>
+                                </div>
+                                <div class="col border-start">
+                                    <div class="pe-1 ps-3 py-3">
+                                        <h5 class="mb-0">{{character.maxKi}}</h5>
+                                        <span class="text-muted">Máximo poder</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 text-truncate">
+                                    {{character.description}}
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </article>
@@ -162,73 +200,76 @@
     </div>
     <div class="container">
         <div class="row">
-            <div class="col text-center"> <a href="#!" class="btn bsb-btn-2xl btn-primary rounded-pill mt-5 mt-xl-10">All Articles</a> </div>
+            <div class="col text-center">
+                <a href="#!" class="btn bsb-btn-2xl btn-primary rounded-pill mt-5 mt-xl-10">All Articles</a>
+            </div>
         </div>
     </div>
 </section>
-
 <div class="container px-4 py-5" id="custom-cards">
     <h2 class="pb-2 border-bottom">Custom cards</h2>
     <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
-
-
-		<div class="col" *ngFor="let character of characters">
-			<div class="card">
-			<!-- Card Body -->
-			<div class="card-body">
-			  <div class="d-flex align-items-center">
-				<!--<div class="card card-cover h-100 overflow-hidden text-white bg-dark rounded-5 shadow-lg" style="background-image: url('{{character.image}}'); background-repeat: no-repeat;background-size: contain;background-position: center top;"></div>-->
-				<div class="position-relative" style="background-repeat: no-repeat;background-size: contain;background-position: center top;">
-				  <img [src]="character.image" [alt]="character.name" width="50px" height="50" class="rounded-circle avatar-xl">
-				</div>
-				<div class="ms-4">
-				  <h4 class="mb-0">{{character.name}}</h4>
-				  <p class="mb-1 fs-6">{{character.race}}</p>
-				  <span class="text-warning lh-1 d-flex align-baseline">{{character.affiliation}}
-				  </span>
-				</div>
-			  </div>
-			  <div class="border-top row mt-3 border-bottom mb-3 g-0">
-				<div class="col">
-				  <div class="pe-1 ps-2 py-3">
-					<h5 class="mb-0">{{character.ki}}</h5>
-					<span>Ki</span>
-				  </div>
-				</div>
-				<div class="col border-start">
-				  <div class="pe-1 ps-3 py-3">
-					<h5 class="mb-0">{{character.maxKi}}</h5>
-					<span>MaxKi</span>
-				  </div>
-				</div>
-				<div class="col border-start">
-				  <div class="pe-1 ps-3 py-3">
-					<h5 class="mb-0">{{character.gender}}</h5>
-					<span>Género</span>
-				  </div>
-				</div>
-			  </div>
-			  <p>{{character.description}}</p>
-			  <a href="#" class="btn btn-outline-secondary btn-sm">View
-				Details</a>
-			</div>
-		  </div>
-		</div>
-
-		<div class="col" *ngFor="let character of characters">
+        <div class="col" *ngFor="let character of characters">
+            <div class="card">
+                <!-- Card Body -->
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <!--<div class="card card-cover h-100 overflow-hidden text-white bg-dark rounded-5 shadow-lg" style="background-image: url('{{character.image}}'); background-repeat: no-repeat;background-size: contain;background-position: center top;"></div>-->
+                        <div class="position-relative" style="background-repeat: no-repeat;background-size: contain;background-position: center top;">
+                            <img [src]="character.image" [alt]="character.name" width="50px" height="50" class="rounded-circle avatar-xl">
+                        </div>
+                        <div class="ms-4">
+                            <h4 class="mb-0">{{character.name}}</h4>
+                            <p class="mb-1 fs-6">{{character.race}}</p>
+                            <span class="text-warning lh-1 d-flex align-baseline">{{character.affiliation}}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="border-top row mt-3 border-bottom mb-3 g-0">
+                        <div class="col">
+                            <div class="pe-1 ps-2 py-3">
+                                <h5 class="mb-0">{{character.ki}}</h5>
+                                <span>Ki</span>
+                            </div>
+                        </div>
+                        <div class="col border-start">
+                            <div class="pe-1 ps-3 py-3">
+                                <h5 class="mb-0">{{character.maxKi}}</h5>
+                                <span>MaxKi</span>
+                            </div>
+                        </div>
+                        <div class="col border-start">
+                            <div class="pe-1 ps-3 py-3">
+                                <h5 class="mb-0">{{character.gender}}</h5>
+                                <span>Género</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p>{{character.description}}</p>
+                    <a href="#" class="btn btn-outline-secondary btn-sm">View Details</a>
+                </div>
+            </div>
+        </div>
+        <div class="col" *ngFor="let character of characters">
             <div class="card card-cover h-100 overflow-hidden text-white bg-dark rounded-5 shadow-lg" style="background-image: url('{{character.image}}'); background-repeat: no-repeat;background-size: contain;background-position: center top;">
                 <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
                     <h2 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">{{ character.name }}</h2>
                     <ul class="d-flex list-unstyled mt-auto">
-                        <li class="me-auto"> <img [src]="character.image" [alt]="character.name" width="32" height="32" class="rounded-circle border border-white" style="background-repeat: no-repeat;background-size: cover;background-position: center top;"> </li>
+                        <li class="me-auto">
+                            <img [src]="character.image" [alt]="character.name" width="32" height="32" class="rounded-circle border border-white" style="background-repeat: no-repeat;background-size: cover;background-position: center top;">
+                        </li>
                         <li class="d-flex align-items-center me-3">
                             <svg class="bi me-2" width="1em" height="1em">
                                 <use xlink:href="#geo-fill"></use>
-                            </svg> <small>{{ character.race }}</small> </li>
+                            </svg>
+                            <small>{{ character.race }}</small>
+                        </li>
                         <li class="d-flex align-items-center">
                             <svg class="bi me-2" width="1em" height="1em">
                                 <use xlink:href="#calendar3"></use>
-                            </svg> <small>{{ character.ki }} / {{ character.maxKi }}</small> </li>
+                            </svg>
+                            <small>{{ character.ki }} / {{ character.maxKi }}</small>
+                        </li>
                     </ul>
                 </div>
             </div>
