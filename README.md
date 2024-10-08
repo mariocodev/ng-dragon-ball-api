@@ -1,9 +1,19 @@
+<div align="center">
+  
+![Badge en Desarollo](https://img.shields.io/badge/status-EN_PROCESO-690)
+![Release_date](https://img.shields.io/badge/release_date-octubre-7cacee)
+![Python_versionx](https://img.shields.io/badge/node-v22.x-417e38)
+![Python_versionx](https://img.shields.io/badge/npm-v10.8.3-c53635)
+
+</div>
+
+
 ## Content
 
 1. [Features](#features)
 2. [Installation](#installation)
 
-Este proyecto es una prueba de concepto de uso de `Actions` a través de **Github Pages** desde un framework frontend, y utiliza el api de `https://web.dragonball-api.com/` para desplegar una aplicación web con funcionalidades de filtrado.
+Este proyecto es una prueba de concepto de uso de `Actions` a través de **Github Pages** desde un framework frontend, y utiliza el api de [https://web.dragonball-api.com](https://web.dragonball-api.com/) para desplegar una aplicación web con funcionalidades de filtrado.
 
 ## Features
 
@@ -65,13 +75,19 @@ Abrir el archivo `/frontend/proxy.config.example.json` y renombrarlo a `proxy.co
 
 ```json
 {
-    "/api/**":{
+    "/api":{
       "target": "https://dragonball-api.com/api",
       "secure": false,
-      "loglevel": "debug"
+      "changeOrigin": true,
+      "loglevel": "debug",
+      "pathRewrite": {
+        "^/api": ""
+      }
     }
 }
 ```
+
+> Para el despliegue en ambiente de `production` es importante tener el flag `{production:true}` en el archivo `environment.production.ts`
 
 **Instalación de `CLI `de angular**
 

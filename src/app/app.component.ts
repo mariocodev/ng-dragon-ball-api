@@ -17,6 +17,9 @@ import { ApiResponse } from './shared/models/api-response.interface';
 export class AppComponent {
 	characters: Character[] = [];
 	searchForm: FormGroup;
+	countCharacter: number = 0;
+
+	LIMIT_RESULT: number = 16;
 
 	constructor(
 		private __dragonBallService: DragonBallService,
@@ -34,7 +37,8 @@ export class AppComponent {
 
 	ngOnInit(): void {
 		//this.loadCharacters(0, 1, 15, 'Go', 'Male', 'Saiyan', 'Z Fighter');
-		this.loadCharacters(0, 1, 15);
+		//this.loadCharacters(0, 1, 15);
+		this.onSearch();
 	}
 
 	loadCharacters(start: number, page: number, limit: number/*, name?: string, gender?: string, race?: string, affiliation?: string*/) {
@@ -46,7 +50,17 @@ export class AppComponent {
 			});
 	}
 
+	countCharacters(limit: number): void {
+		this.__dragonBallService.getCharacters(0, 1, limit)
+			.subscribe((response: ApiResponse) => {this.countCharacter = response.items.length;},
+            (error) => {
+                console.error('Error al obtener el conteo de personajes:', error);
+                this.countCharacter = 0;
+            });
+	}
+
 	onSearch() {
-		this.loadCharacters(0, 1, 15); // Reinicia la búsqueda al primer conjunto de resultados
+		this.loadCharacters(0, 1, this.LIMIT_RESULT); // Reinicia la búsqueda al primer conjunto de resultados
+		this.countCharacters(100);
 	}
 }

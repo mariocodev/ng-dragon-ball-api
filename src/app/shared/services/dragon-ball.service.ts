@@ -2,13 +2,14 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ApiResponse } from '../models/api-response.interface';
 import { Observable } from 'rxjs';
+import { environment } from '../../../environments/environment'
 
 @Injectable({
   	providedIn: 'root'
 })
 export class DragonBallService {
 
-	private apiUrl = 'https://dragonball-api.com/api/characters';
+	private apiUrl = environment.production ? 'https://dragonball-api.com/api' : 'api';
 
 	constructor(private http: HttpClient) {}
 
@@ -38,6 +39,6 @@ export class DragonBallService {
 		const urlWithParams = `${this.apiUrl}?${params.toString()}`;
 		console.log('URL Consultada:', urlWithParams);
 
-		return this.http.get<ApiResponse>(this.apiUrl, { params });
+		return this.http.get<ApiResponse>(`${this.apiUrl}/characters`, { params });
 	}
 }
