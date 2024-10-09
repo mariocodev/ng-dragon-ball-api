@@ -87,6 +87,7 @@ export class AppComponent  implements OnInit {
 	
 	resetForm() {
 		this.searchForm.reset(); // Resetea todos los campos del formulario
+		this.onSearch();
 	}
 
 	resetFormFieldsetGender(): void {

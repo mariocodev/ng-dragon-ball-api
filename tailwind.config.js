@@ -1,7 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
 	content: ["./src/**/*.{html,ts}",],
-	darkMode: 'class',
+	darkMode: ['selector', '[data-mode="dark"]'],
 	theme: {
 		extend: {
 			colors: {
@@ -42,7 +42,8 @@ module.exports = {
 				'Segoe UI Emoji', 
 				'Segoe UI Symbol', 
 				'Noto Color Emoji'
-			]
+			],
+			'mono': ['ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', "Liberation Mono", "Courier New", 'monospace'],
 		}
 	}
 }
