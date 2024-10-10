@@ -1,6 +1,9 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-	content: ["./src/**/*.{html,ts}",],
+	content: [
+		"./src/**/*.{html,ts}",
+		"node_modules/flowbite/**/*.js"
+	],
 	darkMode: ['selector', '[data-mode="dark"]'],
 	theme: {
 		extend: {
@@ -45,6 +48,9 @@ module.exports = {
 			],
 			'mono': ['ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', "Liberation Mono", "Courier New", 'monospace'],
 		}
-	}
+	},
+    plugins: [
+        require('flowbite/plugin')
+    ]
 }
 
