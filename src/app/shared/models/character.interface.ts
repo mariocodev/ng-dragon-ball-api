@@ -1,3 +1,7 @@
+export interface FilterResponse {
+    value:  string;
+    label:  string;
+}
 export interface Character {
     id: number;
     name: string;

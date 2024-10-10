@@ -1,8 +1,3 @@
-export interface FilterResponse {
-    value:  string;
-    label:  string;
-}
-
 export const GenderData = [
     { value: 'Male', label: 'Hombre'},
     { value: 'Female', label: 'Mujer'}

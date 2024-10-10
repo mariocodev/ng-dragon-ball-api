@@ -19,6 +19,12 @@
             </div>
             <div class="flex items-center lg:order-2">
                 <!-- Apps -->
+                <button (click)="toggleDarkMode()" 
+                        class="p-2 rounded-md text-gray-500 dark:text-gray-400 bg-gray-200 dark:bg-gray-700">
+                    <span *ngIf="isDarkMode">🌞</span>
+                    <span *ngIf="!isDarkMode">🌙</span>
+                </button>
+                
                 <button type="button" data-dropdown-toggle="apps-dropdown" class="p-2 text-gray-500 rounded-lg hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-700 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600">
                     <span class="sr-only">View notifications</span>
                     <!-- Icon -->
@@ -166,7 +172,7 @@
                             class="inline-flex justify-center items-center w-5 h-5 text-xs font-semibold rounded-full text-primary-800 bg-primary-100 dark:bg-primary-200 dark:text-primary-800">{{affiliations.length}}
                         </span>
                     </h3>
-                    <ul class="w-full text-sm font-medium text-gray-900 bg-white rounded-lg dark:bg-gray-700 dark:text-white space-y-2 px-2 mb-[20px]">
+                    <ul class="w-full text-sm font-medium text-gray-900 bg-white rounded-lg dark:bg-transparent dark:text-white space-y-2 px-2 mb-[20px]">
 
                         <label 
                             *ngFor="let item of affiliations; let i = index" 
@@ -192,7 +198,7 @@
                         </label>
                     </ul>
             
-                    <div class="pt-[10px] mb-[20px] text-end">
+                    <div class="pt-[10px] mb-[20px] text-end dark:text-white">
                         <button type="button" (click)="resetForm()" class="text-xs text-gray=500 underline">Reset</button>
                     </div>
             
@@ -309,7 +315,7 @@
 
         <div class="flex flex-row justify-between">
             <div class="basis-1/4">
-                <h1 class="relative text-2xl font-medium font-mono text-gray-700 sm:text-3xl mb-7 mt-3 px-5">
+                <h1 class="relative text-2xl font-medium font-mono text-gray-700 sm:text-3xl mb-7 mt-3 px-5 dark:text-white">
                     Personajes 
                     <span class="mt-2 block h-1 w-10 bg-teal-600 sm:w-20"></span>
                 </h1>

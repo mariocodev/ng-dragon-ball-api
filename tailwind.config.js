@@ -4,7 +4,7 @@ module.exports = {
 		"./src/**/*.{html,ts}",
 		"node_modules/flowbite/**/*.js"
 	],
-	darkMode: ['selector', '[data-mode="dark"]'],
+	darkMode: 'class',
 	theme: {
 		extend: {
 			colors: {

@@ -1,39 +1,35 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
-import { FormBuilder, FormGroup, FormArray, ReactiveFormsModule } from '@angular/forms';
-
-import { Character } from './shared/models/character.interface';
+import { isPlatformBrowser } from '@angular/common';
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { DragonBallService } from './shared/services/dragon-ball.service';
+import { Character, FilterResponse } from './shared/models/character.interface';
 import { ApiResponse } from './shared/models/api-response.interface';
-import { environment } from '../environments/environment';
-import { AfilliationData, FilterResponse, GenderData, RaceData } from './shared/models/data-filter.model';
+import { GenderData, RaceData, AfilliationData } from './shared/models/data-filter.model';
 
 @Component({
 	selector: 'app-root',
 	standalone: true,
 	imports: [RouterOutlet, CommonModule, ReactiveFormsModule],
 	templateUrl: './app.component.html',
-	styleUrl: './app.component.scss'
+	styleUrls: ['./app.component.scss']
 })
-export class AppComponent  implements OnInit {
-
+export class AppComponent implements OnInit {
 	characters: Character[] = [];
 	searchForm: FormGroup;
 	genders: FilterResponse[] = GenderData;
 	races: FilterResponse[] = RaceData;
 	affiliations: FilterResponse[] = AfilliationData;
-	loading: boolean = false;
-
-	ENV: boolean = environment.production;
-
-	LIMIT_RESULT: number = 16;
+	loading = false;
+	LIMIT_RESULT = 16;
+	isDarkMode = false;
 
 	constructor(
-		private __dragonBallService: DragonBallService,
-		private fb: FormBuilder
+		private dragonBallService: DragonBallService,
+		private fb: FormBuilder,
+		@Inject(PLATFORM_ID) private platformId: Object
 	) {
-		// Inicializa el formulario
 		this.searchForm = this.fb.group({
 			name: [''],
 			gender: [''],
@@ -44,54 +40,67 @@ export class AppComponent  implements OnInit {
 	}
 
 	ngOnInit(): void {
+		this.initializeTheme();
 		this.onSearch();
-		this.createGenderOptions();
-		this.createRaceOptions();
-		this.createAffiliationsOptions();
 	}
 
-	loadCharacters(start: number, page: number, limit: number/*, name?: string, gender?: string, race?: string, affiliation?: string*/) {
+	initializeTheme(): void {
+		if (isPlatformBrowser(this.platformId)) {
+			this.isDarkMode = this.getStoredTheme() === 'dark' || window.matchMedia('(prefers-color-scheme: dark)').matches;
+			this.updateTheme();
+		}
+	}
+
+	loadCharacters(start: number, page: number, limit: number): void {
 		this.loading = true;
 		const { name, gender, race, affiliation } = this.searchForm.value;
-		this.__dragonBallService.getCharacters(start, page, limit, name, gender, race, affiliation)
+
+		this.dragonBallService.getCharacters(start, page, limit, name, gender, race, affiliation)
 			.subscribe((response: ApiResponse) => {
 				this.characters = response.items ?? response;
-				this.loading = false
-				//console.log(response);
+				this.loading = false;
 			});
 	}
 
-	// Formulario
-	createGenderOptions() {
-		this.genders.forEach(gender => {
-		  	this.searchForm.addControl(gender.value, this.fb.control(false));
-		});
+	onSearch(): void {
+		this.loadCharacters(0, 1, this.LIMIT_RESULT);
 	}
 
-	createRaceOptions() {	
-		this.races.forEach(race => {
-		  	this.searchForm.addControl(race.value, this.fb.control(false));
-		});
-	}
-
-	createAffiliationsOptions() {	
-		this.affiliations.forEach(affiliation => {
-		  	this.searchForm.addControl(affiliation.value, this.fb.control(false));
-		});
-	}
-
-	onSearch() {
-
-		this.loadCharacters(0, 1, this.LIMIT_RESULT); // Reinicia la búsqueda al primer conjunto de resultados
-	}
-	
-	resetForm() {
-		this.searchForm.reset(); // Resetea todos los campos del formulario
+	resetForm(): void {
+		this.searchForm.reset();
 		this.onSearch();
 	}
 
-	resetFormFieldsetGender(): void {
-		this.searchForm.reset();
-		//this.onSearch();
+	toggleDarkMode(): void {
+		this.isDarkMode = !this.isDarkMode;
+		
+		if (isPlatformBrowser(this.platformId)) {
+		  	this.storeTheme(this.isDarkMode ? 'dark' : 'light');
+		}
+	
+		this.updateTheme();
+	}
+
+	private getStoredTheme(): string | null {
+		if (isPlatformBrowser(this.platformId)) {
+			return localStorage.getItem('theme');
+		}
+		return null;
+	}
+
+	private storeTheme(theme: string): void {
+		if (isPlatformBrowser(this.platformId)) {
+			localStorage.setItem('theme', theme);
+		}
+	}
+
+	updateTheme(): void {
+		if (isPlatformBrowser(this.platformId)) {
+			if (this.isDarkMode) {
+				document.documentElement.classList.add('dark');
+			} else {
+				document.documentElement.classList.remove('dark');
+			}
+		}
 	}
 }
