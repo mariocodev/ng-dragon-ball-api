@@ -109,29 +109,6 @@
                             dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" 
                             placeholder="Nombre del personaje" formControlName="name" (keypress)="onSearch()" />
                     </div>
-                    <ul class="grid w-full gap-6 md:grid-cols-2 mb-5">
-                        <li *ngFor="let item of genders">
-                            <input 
-                                type="radio" 
-                                id="{{item.value}}" 
-                                formControlName="gender" 
-                                value="{{item.value}}" 
-                                class="hidden peer" 
-                                required 
-                                (change)="onSearch()"
-                            />
-                            <label 
-                                for="{{item.value}}" 
-                                class="flex items-center justify-between p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer 
-                                       dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 hover:text-gray-600 
-                                       peer-checked:border-blue-600 peer-checked:text-blue-600 dark:hover:text-gray-300 dark:peer-checked:text-blue-500">
-                                <div class="flex flex-col sm:inline-flex sm:items-center text-center space-x-2">
-                                    <div class="font-semibold">{{ item.label }}</div>
-                                    <i class="bi bi-gender-{{ item.value | lowercase }}"></i>
-                                </div>
-                            </label>
-                        </li>
-                    </ul>
                     
                     <ul class="grid w-full gap-6 md:grid-cols-2 mb-5">
                         <li *ngFor="let item of genders">
@@ -143,6 +120,9 @@
                                     <div class="font-semibold">{{item.label}}</div>
                                     <i class="bi bi-gender-{{item.value | lowercase}}"></i>
                                 </div>
+                                <svg class="w-5 h-5 ms-3 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+                                </svg>
                             </label>
                         </li>
                     </ul>
