@@ -199,7 +199,7 @@
                     </ul>
             
                     <div class="pt-[10px] mb-[20px] text-end dark:text-white">
-                        <button type="button" (click)="resetForm()" class="text-xs text-gray=500 underline">Reset</button>
+                        <button type="button" (click)="resetForm()" class="text-xs text-gray=500 underline">Reset filter</button>
                     </div>
             
                 </form>
@@ -326,7 +326,7 @@
                         type="button" 
                         class="py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:outline-none focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700" 
                             (click)="resetForm()">
-                        Reset Form
+                            Reset Filter
                     </button>
                 </div>
                 
@@ -353,7 +353,7 @@
             @if (loading) {
                 <div class="relative mx-auto w-full" *ngFor="let i of [].constructor(LIMIT_RESULT);">
                     <div class="relative inline-block duration-300 ease-in-out transition-transform transform hover:-translate-y-2 w-full">
-                        <div class="shadow p-4 rounded-lg bg-white">
+                        <div class="shadow p-4 rounded-lg bg-white dark:bg-slate-600">
                             <div class="flex justify-center relative rounded-lg overflow-hidden h-52">
                                 <div class="transition-transform duration-500 transform ease-in-out hover:scale-110 w-full">
                                     <div class="absolute inset-0 bg-black opacity-10"></div>
@@ -371,10 +371,9 @@
                                 <p class="mt-2 text-sm text-gray-800 line-clamp-1 bg-indigo-100 animate-pulse h-6 rounded"></p>
                             </div>
                     
-                            <div class="grid grid-cols-2 grid-rows-2 gap-4 mt-8">
-                                <p class="inline-flex flex-col xl:flex-row xl:items-center text-gray-800 bg-indigo-200 animate-pulse rounded">
-                                </p>
-                                <p class="inline-flex flex-col xl:flex-row xl:items-center text-gray-800 bg-indigo-200 animate-pulse rounded"></p>
+                            <div class="grid grid-cols-2 grid-rows-1 gap-4 mt-8">
+                                <p class="inline-flex flex-col xl:flex-row xl:items-center text-gray-800 bg-indigo-200 animate-pulse rounded h-6"></p>
+                                <p class="inline-flex flex-col xl:flex-row xl:items-center text-gray-800 bg-indigo-200 animate-pulse rounded h-6"></p>
                             </div>
                         </div>
                     </div>
@@ -382,7 +381,7 @@
             } @else {
                 <div class="relative mx-auto w-full" *ngFor="let character of characters">
                     <a href="#" class="relative inline-block duration-300 ease-in-out transition-transform transform hover:-translate-y-2 w-full" data-drawer-target="drawer-right-example" data-drawer-show="drawer-right-example" data-drawer-placement="right" aria-controls="drawer-right-example">
-                        <div class="shadow p-4 rounded-lg bg-white">
+                        <div class="shadow p-4 rounded-lg bg-white dark:bg-opacity-5">
                             <div class="flex justify-center relative rounded-lg overflow-hidden h-52">
                                 <div class="transition-transform duration-500 transform ease-in-out hover:scale-110 w-full">
                                     <div class="absolute inset-0 bg-black opacity-10 bg-gradient-to-r" 
@@ -409,22 +408,22 @@
                             </div>
                     
                             <div class="mt-4">
-                                <h2 class="font-medium text-base md:text-lg text-gray-800 line-clamp-1">
+                                <h2 class="font-medium text-base md:text-lg text-gray-800 line-clamp-1 dark:text-slate-50">
                                     {{character.name}}
                                 </h2>
-                                <p class="mt-2 text-sm text-gray-800 line-clamp-3 text-pretty">
+                                <p class="mt-2 text-sm text-gray-800 line-clamp-3 text-pretty dark:text-slate-50">
                                     {{character.description}}
                                 </p>
                             </div>
                     
                             <div class="grid grid-cols-2 grid-rows-1 gap-4 mt-8">
                                 
-                                <p *ngIf="character.ki !== '0' " class="inline-flex flex-col xl:flex-row xl:items-center text-gray-800">
-                                    <i class="text-xl inline-block w-5 mr-1 fill-current text-lime-800 bi bi-battery-half"></i>
+                                <p *ngIf="character.ki !== '0' " class="inline-flex flex-col xl:flex-row xl:items-center text-gray-800 dark:text-gray-50">
+                                    <i class="text-xl inline-block w-5 mr-1 fill-current text-lime-800 bi bi-battery-half dark:text-lime-300"></i>
                                     <span class="mt-2 xl:mt-0">{{character.ki}}</span>
                                 </p>
-                                <p *ngIf="character.maxKi !== '0' " class="inline-flex flex-col xl:flex-row xl:items-center text-gray-800">
-                                    <i class="inline-block w-5 mr-1 fill-current text-green-800 bi bi-battery-full"></i>
+                                <p *ngIf="character.maxKi !== '0' " class="inline-flex flex-col xl:flex-row xl:items-center text-gray-800 dark:text-gray-50">
+                                    <i class="inline-block w-5 mr-1 fill-current text-green-800 bi bi-battery-full dark:text-lime-300"></i>
                                     <span class="mt-2 xl:mt-0">{{character.maxKi}}</span>
                                 </p>
                             </div>
@@ -433,7 +432,7 @@
                 </div>  
         }
         </div>
-        <div class="flex justify-center mb-5" *ngIf="characters.length > 0">
+        <div class="flex justify-center my-10" *ngIf="characters.length > 0">
             <!-- Previous Button -->
             <a href="#" class="flex items-center justify-center px-4 h-10 me-3 text-base font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
                 <svg class="w-3.5 h-3.5 me-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
