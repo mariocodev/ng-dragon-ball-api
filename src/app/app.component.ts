@@ -16,17 +16,20 @@ import { GenderData, RaceData, AfilliationData } from './shared/models/data-filt
 	styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-	characters: Character[] = [];
+	
 	searchForm: FormGroup;
+	loading = false;
+
 	genders: FilterResponse[] = GenderData;
 	races: FilterResponse[] = RaceData;
 	affiliations: FilterResponse[] = AfilliationData;
-	loading = false;
 	
+	characters: Character[] = [];
+	charactersFilter: Character[] = []; // Almacena solo los personajes de la página actual
+	totalPages: number = 0; // Total de páginas
 	currentPage: number = 1; // Para el seguimiento de la página actual
 	itemsPerPage: number = 4; // Elementos por página
-	totalPages: number = 0; // Total de páginas
-
+	
 	isDarkMode = false;
 
 	constructor(
@@ -45,7 +48,7 @@ export class AppComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.initializeTheme();
-		this.onSearch();
+		this.onLoad();
 	}
 
 	initializeTheme(): void {
@@ -55,31 +58,62 @@ export class AppComponent implements OnInit {
 		}
 	}
 
-	loadCharacters(start: number, page: number, limit: number): void {
+	onLoadCharacters(page: number): void {
 		this.loading = true;
-		const { name, gender, race, affiliation } = this.searchForm.value;
 
-		this.dragonBallService.getCharacters(start, page, limit, name, gender, race, affiliation)
+		this.dragonBallService.getCharactersNoFilter(page, this.itemsPerPage)
 			.subscribe((response: ApiResponse) => {
 				this.characters = response.items ?? [];
 				this.totalPages = response.meta.totalPages;
 				this.currentPage = response.meta.currentPage;
+
 				this.loading = false;
 			});
 	}
 
-	onPageChange(page: number): void {
-		console.log("page:", page);
-		this.loadCharacters((page /*- 1*/) * this.itemsPerPage, page, this.itemsPerPage);
+	onFilterCharacters(): void {
+		this.loading = true;
+		const { name, gender, race, affiliation } = this.searchForm.value;
+
+		this.dragonBallService.getCharactersByFilter(1, this.itemsPerPage, name, gender, race, affiliation)
+			.subscribe((response: Character[]) => {
+				this.charactersFilter = response ?? [];
+				this.totalPages = Math.ceil(this.charactersFilter.length / this.itemsPerPage);
+				console.log("totalPages:", this.totalPages)
+				this.currentPage = 1;
+				this.updateDisplayedCharacters();
+				this.loading = false;
+			});
 	}
 
-	onSearch(): void {
-		this.loadCharacters(2, 2, this.itemsPerPage);
+	updateDisplayedCharacters(): void {
+		const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+		const endIndex = startIndex + this.itemsPerPage;
+		console.log("startIndex: ", startIndex, " - endIndex: ", endIndex);
+		this.characters = this.charactersFilter.slice(startIndex, endIndex);
+		console.log("this.displayedCharacter: ", this.characters);
+	}
+
+	goToPage(page: number): void {
+		if (page >= 1 && page <= this.totalPages) {
+		  this.onLoadCharacters(page);
+		}
+	}
+
+	onPageChange(page: number): void {
+		console.log("page:", page);
+		//this.onLoadCharacters((page /*- 1*/) * this.itemsPerPage);
+		this.currentPage = page;
+		this.updateDisplayedCharacters();
+	}
+
+	onLoad(): void {
+		this.onLoadCharacters(this.currentPage);
 	}
 
 	resetForm(): void {
 		this.searchForm.reset();
-		this.onSearch();
+		this.onLoad();
 	}
 
 	toggleDarkMode(): void {
