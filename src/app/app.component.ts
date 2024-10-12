@@ -28,7 +28,8 @@ export class AppComponent implements OnInit {
 	charactersFilter: Character[] = []; // Almacena solo los personajes de la página actual
 	totalPages: number = 0; // Total de páginas
 	currentPage: number = 1; // Para el seguimiento de la página actual
-	itemsPerPage: number = 4; // Elementos por página
+	itemsPerPage: number = 8; // Elementos por página
+	isFilter: boolean = false;
 	
 	isDarkMode = false;
 
@@ -66,7 +67,8 @@ export class AppComponent implements OnInit {
 				this.characters = response.items ?? [];
 				this.totalPages = response.meta.totalPages;
 				this.currentPage = response.meta.currentPage;
-
+				
+				this.isFilter = false;
 				this.loading = false;
 			});
 	}
@@ -82,6 +84,7 @@ export class AppComponent implements OnInit {
 				console.log("totalPages:", this.totalPages)
 				this.currentPage = 1;
 				this.updateDisplayedCharacters();
+				this.isFilter = true;
 				this.loading = false;
 			});
 	}

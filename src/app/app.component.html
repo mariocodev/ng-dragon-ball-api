@@ -351,7 +351,7 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 w-full mb-3 p-4">
             
             @if (loading) {
-                <div class="relative mx-auto w-full" *ngFor="let i of [].constructor(2);">
+                <div class="relative mx-auto w-full" *ngFor="let i of [].constructor(4);">
                     <div class="relative inline-block duration-300 ease-in-out transition-transform transform hover:-translate-y-2 w-full">
                         <div class="shadow p-4 rounded-lg bg-white dark:bg-slate-600">
                             <div class="flex justify-center relative rounded-lg overflow-hidden h-52">
@@ -423,7 +423,7 @@
                                     <span class="mt-2 xl:mt-0">{{character.ki}}</span>
                                 </p>
                                 <p *ngIf="character.maxKi !== '0' " class="inline-flex flex-col xl:flex-row xl:items-center text-gray-800 dark:text-gray-50">
-                                    <i class="inline-block w-5 mr-1 fill-current text-green-800 bi bi-battery-full dark:text-lime-300"></i>
+                                    <i class="text-xl inline-block w-5 mr-1 fill-current text-green-800 bi bi-battery-full dark:text-lime-300"></i>
                                     <span class="mt-2 xl:mt-0">{{character.maxKi}}</span>
                                 </p>
                             </div>
@@ -434,37 +434,20 @@
         </div>
         <div class="flex justify-center my-10" *ngIf="characters.length > 0">
 
-            <div class="pagination">
-                <button
-                  *ngFor="let page of [].constructor(totalPages); let i = index"
-                  [disabled]="i + 1 === currentPage"
-                  (click)="onPageChange(i + 1)"
-                >
-                  {{ i + 1 }}
-                </button>
-            </div>
-
-            <div class="relative mx-auto w-full">
-                <button (click)="goToPage(1)" [disabled]="currentPage === 1">Primera</button>
-                <button (click)="goToPage(currentPage - 1)" [disabled]="currentPage === 1">Anterior</button>
-                <span>Página {{ currentPage }} de {{ totalPages }}</span>
-                <button (click)="goToPage(currentPage + 1)" [disabled]="currentPage === totalPages">Siguiente</button>
-                <button (click)="goToPage(totalPages)" [disabled]="currentPage === totalPages">Última</button>
-            </div>
-
             <!-- Previous Button -->
-            <a href="#" (click)="goToPage(currentPage - 1)" class="flex items-center justify-center px-4 h-10 me-3 text-base font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+            <button (click)="isFilter ? onPageChange(currentPage - 1) : goToPage(currentPage - 1)" [disabled]="currentPage === 1" 
+                class="flex items-center justify-center px-4 h-10 me-3 text-base font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
                 <svg class="w-3.5 h-3.5 me-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5H1m0 0 4 4M1 5l4-4"/>
                 </svg>
                 Previous
-                </a>
-            <a href="#" (click)="goToPage(currentPage + 1)" class="flex items-center justify-center px-4 h-10 text-base font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+            </button>
+            <button (click)="isFilter ? onPageChange(currentPage + 1) : goToPage(currentPage + 1)" [disabled]="currentPage === totalPages" class="flex items-center justify-center px-4 h-10 text-base font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
                 Next
                 <svg class="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
                 </svg>
-            </a>
+            </button>
         </div>
 
         <!-- drawer component -->
