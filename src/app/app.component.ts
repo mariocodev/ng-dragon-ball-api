@@ -7,11 +7,12 @@ import { DragonBallService } from './shared/services/dragon-ball.service';
 import { Character, FilterResponse } from './shared/models/character.interface';
 import { ApiResponse } from './shared/models/api-response.interface';
 import { GenderData, RaceData, AfilliationData } from './shared/models/data-filter.model';
+import { CharacterDetailsComponent } from './pages/character-details/character-details.component';
 
 @Component({
 	selector: 'app-root',
 	standalone: true,
-	imports: [RouterOutlet, CommonModule, ReactiveFormsModule],
+	imports: [RouterOutlet, CommonModule, ReactiveFormsModule, CharacterDetailsComponent],
 	templateUrl: './app.component.html',
 	styleUrls: ['./app.component.scss']
 })
@@ -25,11 +26,13 @@ export class AppComponent implements OnInit {
 	affiliations: FilterResponse[] = AfilliationData;
 	
 	characters: Character[] = [];
-	charactersFilter: Character[] = []; // Almacena solo los personajes de la página actual
+	charactersFilter: Character[] = []; // Almacena solo los personajes de la página actual	
+	characterId!: number;
 	totalPages: number = 0; // Total de páginas
 	currentPage: number = 1; // Para el seguimiento de la página actual
 	itemsPerPage: number = 8; // Elementos por página
 	isFilter: boolean = false;
+	openModal = false;
 	
 	isDarkMode = false;
 
@@ -87,6 +90,17 @@ export class AppComponent implements OnInit {
 				this.isFilter = true;
 				this.loading = false;
 			});
+	}
+
+	setCharacterById(id: number): void{
+		console.log("Initial openModal: ", this.openModal);
+		this.characterId = id;
+		this.openModal = true;
+		console.log("filterBy: ", id, " - openModal: ", this.openModal);
+	}
+
+	handleCloseModal() {
+		this.openModal = false;
 	}
 
 	updateDisplayedCharacters(): void {

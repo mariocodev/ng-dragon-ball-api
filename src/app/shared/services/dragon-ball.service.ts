@@ -75,4 +75,12 @@ export class DragonBallService {
 		);
 	}
 
+	getCharactersById( id: number): Observable<Character> {
+		
+		return this.http.get<Character>(`${this.apiUrl}/characters/${id}`)
+		.pipe(
+			catchError(this.handleError)
+		);
+	}
+
 }
