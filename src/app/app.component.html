@@ -351,7 +351,7 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 w-full mb-3 p-4">
             
             @if (loading) {
-                <div class="relative mx-auto w-full" *ngFor="let i of [].constructor(LIMIT_RESULT);">
+                <div class="relative mx-auto w-full" *ngFor="let i of [].constructor(2);">
                     <div class="relative inline-block duration-300 ease-in-out transition-transform transform hover:-translate-y-2 w-full">
                         <div class="shadow p-4 rounded-lg bg-white dark:bg-slate-600">
                             <div class="flex justify-center relative rounded-lg overflow-hidden h-52">
@@ -433,6 +433,17 @@
         }
         </div>
         <div class="flex justify-center my-10" *ngIf="characters.length > 0">
+
+            <div class="pagination">
+                <button
+                  *ngFor="let page of [].constructor(totalPages); let i = index"
+                  [disabled]="i + 1 === currentPage"
+                  (click)="onPageChange(i + 1)"
+                >
+                  {{ i + 1 }}
+                </button>
+            </div>
+
             <!-- Previous Button -->
             <a href="#" class="flex items-center justify-center px-4 h-10 me-3 text-base font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
                 <svg class="w-3.5 h-3.5 me-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">

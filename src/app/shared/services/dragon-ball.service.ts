@@ -1,8 +1,9 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ApiResponse } from '../models/api-response.interface';
-import { Observable } from 'rxjs';
+import { catchError, map, Observable, of } from 'rxjs';
 import { environment } from '../../../environments/environment'
+import { Character } from '../models/character.interface';
 
 @Injectable({
   	providedIn: 'root'
@@ -39,6 +40,37 @@ export class DragonBallService {
 		const urlWithParams = `${this.apiUrl}?${params.toString()}`;
 		console.log('URL Consultada:', urlWithParams);
 
-		return this.http.get<ApiResponse>(`${this.apiUrl}/characters`, { params });
-	}
+		return this.http.get<ApiResponse | Character[]>(`${this.apiUrl}/characters`, { params }).pipe(
+			map((response) => {
+			if (Array.isArray(response)) {
+				// Convertir el arreglo de Character a ApiResponse si la respuesta es un arreglo
+				return {
+				items: response,
+				meta: {
+					totalItems: response.length,
+					itemCount: response.length,
+					itemsPerPage: limit,
+					totalPages: 1,
+					currentPage: 1,
+				},
+				links: {
+					first: '',
+					previous: '',
+					next: '',
+					last: '',
+				},
+				} as ApiResponse;
+			}
+			return response as ApiResponse;
+			}),
+			catchError((error) => {
+				console.error('Error fetching characters:', error);
+				return of({
+					items: [],
+					meta: { totalItems: 0, itemCount: 0, itemsPerPage: 0, totalPages: 0, currentPage: 0 },
+					links: { first: '', previous: '', next: '', last: '' },
+				} as ApiResponse);
+			})
+		);
+  }
 }

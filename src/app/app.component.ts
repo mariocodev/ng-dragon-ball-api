@@ -22,7 +22,11 @@ export class AppComponent implements OnInit {
 	races: FilterResponse[] = RaceData;
 	affiliations: FilterResponse[] = AfilliationData;
 	loading = false;
-	LIMIT_RESULT = 16;
+	
+	currentPage: number = 1; // Para el seguimiento de la página actual
+	itemsPerPage: number = 4; // Elementos por página
+	totalPages: number = 0; // Total de páginas
+
 	isDarkMode = false;
 
 	constructor(
@@ -57,13 +61,20 @@ export class AppComponent implements OnInit {
 
 		this.dragonBallService.getCharacters(start, page, limit, name, gender, race, affiliation)
 			.subscribe((response: ApiResponse) => {
-				this.characters = response.items ?? response;
+				this.characters = response.items ?? [];
+				this.totalPages = response.meta.totalPages;
+				this.currentPage = response.meta.currentPage;
 				this.loading = false;
 			});
 	}
 
+	onPageChange(page: number): void {
+		console.log("page:", page);
+		this.loadCharacters((page /*- 1*/) * this.itemsPerPage, page, this.itemsPerPage);
+	}
+
 	onSearch(): void {
-		this.loadCharacters(0, 1, this.LIMIT_RESULT);
+		this.loadCharacters(2, 2, this.itemsPerPage);
 	}
 
 	resetForm(): void {
