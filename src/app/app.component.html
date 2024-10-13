@@ -383,12 +383,11 @@
                 <div class="relative mx-auto w-full" *ngFor="let character of characters">
                     <a (click)="setCharacterById(character.id)" class="relative inline-block duration-300 ease-in-out transition-transform transform hover:-translate-y-2 w-full">
                         <div class="shadow p-4 rounded-lg bg-white dark:bg-opacity-5">
-                            <div class="flex justify-center relative rounded-lg overflow-hidden h-52">
-                                <div class="transition-transform duration-500 transform ease-in-out hover:scale-110 w-full">
+                            <div class="flex justify-center relative rounded-lg h-52">
+                                <div class="flex justify-center transition-transform duration-500 transform ease-in-out hover:scale-110 w-full">
                                     <div class="absolute inset-0 bg-black opacity-10 bg-gradient-to-r" 
                                         [ngClass]=" {'from-cyan-500 to-blue-500': character.gender === 'Male', 'from-purple-500 to-pink-500' : character.gender === 'Female' } "></div>
-                                    <!-- https://tailwindcss.com/docs/object-position -->
-                                    <img src="{{character.image}}" alt="{{character.image}}" class="bg-inherit object-top object-contain">
+                                    <img src="{{character.image}}" alt="{{character.image}}" style="height: 250px;top: -20px;" class="bg-inherit object-top object-contain absolute h-[250px]">
                                 </div>
                     
                                 <div class="absolute flex justify-center bottom-0 mb-1">
@@ -404,7 +403,7 @@
                                     </div>
                                 </div>
                     
-                                <span class="absolute top-0 left-0 inline-flex mt-2 ml-2 px-2 py-1 rounded-lg z-10 bg-red-500 text-sm font-medium text-white select-none">{{character.race}}
+                                <span class="absolute -top-5 left-0 inline-flex -mt-2 px-2 py-1 rounded-lg z-10 bg-red-500 text-sm font-medium text-white select-none">{{character.race}}
                                 </span>
                             </div>
                     
