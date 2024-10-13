@@ -97,6 +97,11 @@ export class AppComponent implements OnInit {
 		return raceItem?.color;
 	}
 
+	setLimit(limit: number): void {
+		this.itemsPerPage = limit;
+		this.onLoad();
+	}
+
 	setCharacterById(id: number): void{
 		console.log("Initial openModal: ", this.openModal);
 		this.characterId = id;
@@ -118,7 +123,7 @@ export class AppComponent implements OnInit {
 
 	goToPage(page: number): void {
 		if (page >= 1 && page <= this.totalPages) {
-		  this.onLoadCharacters(page);
+			this.onLoadCharacters(page);
 		}
 	}
 
@@ -135,6 +140,7 @@ export class AppComponent implements OnInit {
 
 	resetForm(): void {
 		this.searchForm.reset();
+		this.currentPage = 1;
 		this.onLoad();
 	}
 

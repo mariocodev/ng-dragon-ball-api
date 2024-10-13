@@ -312,26 +312,33 @@
     </aside>
 
     <main class="p-4 md:ml-72 h-auto pt-20">
-
-        <div class="flex flex-row justify-between">
-            <div class="basis-1/4">
-                <h1 class="relative text-2xl font-medium font-mono text-gray-700 sm:text-3xl mb-7 mt-3 px-5 dark:text-white">
-                    Personajes 
-                    <span class="mt-2 block h-1 w-10 bg-teal-600 sm:w-20"></span>
-                </h1>
-            </div>
-            <div class="basis-1/4 flex justify-end px-6">
-                <div class="content-center">
-                    <button 
-                        type="button" 
-                        class="py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:outline-none focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700" 
-                            (click)="resetForm()">
-                            Reset Filter
-                    </button>
+        <section class="bg-gray-50 py-5 antialiased dark:bg-gray-900 md:py-5">
+            <div class="mx-auto max-w-screen-xl px-4 2xl:px-0">
+                <div class="mb-4 items-end justify-between space-y-4 sm:flex sm:space-y-0 md:mb-8">
+                    <div>
+                        <h2 class="mt-3 text-xl font-semibold text-gray-900 dark:text-white sm:text-2xl">Personajes</h2>
+                        <span class="mt-2 block h-1 w-10 bg-teal-600 sm:w-20"></span>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <button (click)="resetForm()" type="button" class="flex w-full items-center justify-center rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm font-medium text-gray-900 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700 sm:w-auto">
+                            <i class="bi bi-arrow-clockwise -ms-0.5 me-2 h-4 w-4" aria-hidden="true"></i> Reset Filter
+                        </button>
+                        <div>
+                            <ul class="flex w-full items-center rounded-lg border border-gray-200 bg-white text-sm font-medium text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-white">
+                                <ng-container *ngFor="let limit of [4, 8, 16]">
+                                    <li class="w-full border-r border-gray-200 dark:border-gray-600" *ngIf="limit !== null">
+                                        <div class="flex items-center pl-3">
+                                            <input (click)="setLimit(limit)" id="condition{{limit}}" type="radio" value="" name="list-radio" [checked]="limit === itemsPerPage" class="h-4 w-4 border-gray-300 bg-gray-100 text-primary-600 focus:ring-primary=500 dark:border-gray=500 dark:bg-gray=600 dark:ring-offset=gray=700 dark:focus:ring-primary=600" />
+                                            <label [for]="'condition' + limit" class="mx-2 w-full py-3 text-sm font-medium text-gray=900 dark:text=gray=300">{{ limit }}</label>
+                                        </div>
+                                    </li>
+                                </ng-container>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
-                
             </div>
-        </div>
+        </section>
         
         <div *ngIf="characters.length === 0 && !loading" class="flex items-center px-10 p-4 mb-4 text-yellow-800 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-300" role="alert">
             <svg class="flex-shrink-0 w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
@@ -350,31 +357,36 @@
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 w-full mb-3 p-4">
-            
             @if (loading) {
-                <div class="relative mx-auto w-full" *ngFor="let i of [].constructor(4);">
-                    <div class="relative inline-block duration-300 ease-in-out transition-transform transform hover:-translate-y-2 w-full">
-                        <div class="shadow p-4 rounded-lg bg-white dark:bg-slate-600">
-                            <div class="flex justify-center relative rounded-lg overflow-hidden h-52">
-                                <div class="transition-transform duration-500 transform ease-in-out hover:scale-110 w-full">
-                                    <div class="absolute inset-0 bg-black opacity-10"></div>
+                <div class="relative mx-auto w-full" *ngFor="let i of [].constructor(2);">
+                    <div class="relative inline-block duration-300 ease-in-out transition-transform transform w-full cursor-wait">
+                        <div class="shadow p-4 rounded-lg bg-white dark:bg-opacity-5">
+                            <div class="flex justify-center relative rounded-lg h-52">
+                                <div class="flex justify-end transition-transform duration-500 ease-in-out w-full relative">
+                                    <div class="absolute inset-0 w-full overflow-hidden backdrop-brightness-200">
+                                        <svg class="relative inset-0 bg-black opacity-10 bg-gradient-to-r" viewBox="0 0 375 283" fill="none" style="transform: scale(1.5); opacity: 0.1;height:100%">
+                                            <rect x="159.52" y="175" width="152" height="152" rx="8" transform="rotate(-45 159.52 175)" fill="white"/>
+                                            <rect y="107.48" width="152" height="152" rx="8" transform="rotate(-45 0 107.48)" fill="white"/>
+                                        </svg>
+                                    </div>
+                                    <img src="" alt="" class="object-top object-contain absolute h-[250px] transition-transform duration-300  rounded-md shadow bg-gray-500 animate-pulse w-20 mb-2">
                                 </div>
-                    
-                                <div class="absolute flex justify-center bottom-0 mb-3 ">
-                                    <div class="flex px-4 py-1 space-x-5 rounded-lg overflow-hidden shadow bg-gray-400 animate-pulse h-6 w-40 mb-2"></div>
-                                </div>
-                    
-                                <span class="absolute top-0 left-0 inline-flex mt-3 ml-3 px-3 py-2 rounded-lg z-10 text-sm font-medium text-white select-none bg-red-300 animate-pulse h-8 w-16"></span>
                             </div>
                     
                             <div class="mt-4">
-                                <h2 class="font-medium text-base md:text-lg text-gray-800 line-clamp-1 bg-indigo-300 animate-pulse h-6 w-28 rounded"></h2>
-                                <p class="mt-2 text-sm text-gray-800 line-clamp-1 bg-indigo-100 animate-pulse h-6 rounded"></p>
-                            </div>
-                    
-                            <div class="grid grid-cols-2 grid-rows-1 gap-4 mt-8">
-                                <p class="inline-flex flex-col xl:flex-row xl:items-center text-gray-800 bg-indigo-200 animate-pulse rounded h-6"></p>
-                                <p class="inline-flex flex-col xl:flex-row xl:items-center text-gray-800 bg-indigo-200 animate-pulse rounded h-6"></p>
+                                <h2 class="rounded-md shadow bg-gray-400 animate-pulse h-5 w-20 mb-2"></h2>
+                                <span class="me-2 rounded px-2.5 py-0.5 text-xs font-medium dark:bg-primary-900 shadow bg-gray-400 animate-pulse h-4 w-25">
+                                </span>
+                                <p class="mt-2 dark:text-slate-50 rounded-md shadow bg-gray-400 animate-pulse h-12"></p>
+                                <hr class="mt-5">
+                                <ul class="max-w-xs flex flex-col divide-y divide-gray-200 dark:divide-neutral-700">
+                                    <li class="inline-flex items-center gap-x-2 py-3" *ngFor="let i of [].constructor(2);">
+                                        <div class="flex justify-between w-full">
+                                            <span class="rounded-md shadow bg-gray-400 animate-pulse h-6 w-20"></span>
+                                            <span class="inline-flex items-center py-1 px-2 rounded-full text-xs font-medium text-blue-900 shadow bg-gray-200 animate-pulse h-6 w-20"></span>
+                                        </div>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -385,23 +397,14 @@
                         <div class="shadow p-4 rounded-lg bg-white dark:bg-opacity-5">
                             
                             <div class="flex justify-center relative rounded-lg h-52" [ngClass]="getColorRace(character.race)">
-                                <div class="flex justify-center transition-transform duration-500 ease-in-out w-full relative group">
+                                <div class="flex justify-end transition-transform duration-500 ease-in-out w-full relative group">
                                     <div class="absolute inset-0 w-full overflow-hidden backdrop-brightness-200">
-                                        <svg class="relative inset-0 bg-black opacity-10 bg-gradient-to-r" viewBox="0 0 375 283" fill="none" style="transform: scale(1.5); opacity: 0.1;">
+                                        <svg class="relative inset-0 bg-black opacity-10 bg-gradient-to-r" viewBox="0 0 375 283" fill="none" style="transform: scale(1.5); opacity: 0.1;height:100%">
                                             <rect x="159.52" y="175" width="152" height="152" rx="8" transform="rotate(-45 159.52 175)" fill="white"/>
                                             <rect y="107.48" width="152" height="152" rx="8" transform="rotate(-45 0 107.48)" fill="white"/>
                                         </svg>
                                     </div>
                                     <img src="{{character.image}}" alt="{{character.image}}" class="bg-inherit object-top object-contain absolute h-[250px] drop-shadow-md transition-transform duration-300 group-hover:scale-110">
-                                </div>
-                    
-                                <div class="absolute flex justify-center bottom-0 mb-1">
-                                    <div class="flex px-4 py-1 space-x-5 rounded-lg overflow-hidden shadow text-sm text-white"
-                                    [ngClass]=" {'bg-blue-500': character.gender === 'Male', 'bg-pink-600' : character.gender === 'Female' }">
-                                        <p class="flex items-center font-bold">
-                                            <i class="shadow bi " [ngClass]=" 'bi-gender-'+character.gender | lowercase "></i>
-                                        </p>
-                                    </div>
                                 </div>
                             </div>
                     
@@ -409,6 +412,15 @@
                                 <h2 class="font-semibold text-base md:text-lg text-gray-800 line-clamp-1 dark:text-slate-50">
                                     {{character.name}}
                                 </h2>
+                                <span class="me-2 rounded px-2.5 py-0.5 text-xs font-medium
+                                    {{ character.gender === 'Male' ? 'bg-blue-100 dark:bg-blue-800' : 'bg-pink-100 dark:bg-pink-700' }}">
+                                    <i class="shadow bi bi-gender-{{ character.gender | lowercase }}" 
+                                    [ngClass]="{
+                                        'text-blue-500 dark:text-white': character.gender === 'Male', 
+                                        'text-pink-800 dark:text-white': character.gender === 'Female'
+                                    }"></i>
+                                </span>
+
                                 <p class="mt-2 text-sm text-gray-800 line-clamp-3 text-pretty dark:text-slate-50">
                                     {{character.description}}
                                 </p>
