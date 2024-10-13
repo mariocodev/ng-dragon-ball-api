@@ -92,6 +92,11 @@ export class AppComponent implements OnInit {
 			});
 	}
 
+	getColorRace(race: string) {
+		const raceItem = this.races.find(e => e.value === race);
+		return raceItem?.color;
+	}
+
 	setCharacterById(id: number): void{
 		console.log("Initial openModal: ", this.openModal);
 		this.characterId = id;

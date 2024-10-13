@@ -4,18 +4,18 @@ export const GenderData = [
 ];
 
 export const RaceData = [
-    { value: 'Saiyan', label: 'Saiyan'},
-    { value: 'Namekian', label: 'Namekian'},
-    { value: 'Human', label: 'Humano'},
-    { value: 'Majin', label: 'Majin'},
-    { value: 'Frieza Race', label: 'Frieza Race'},
-    { value: 'Jiren Race', label: 'Jiren Race'},
-    { value: 'Android', label: 'Android'},
-    { value: 'God', label: 'God'},
-    { value: 'Angel', label: 'Angel'},
-    { value: 'Evil', label: 'Evil'},
-    { value: 'Unknown', label: 'Unknown'},
-    { value: 'Nucleico benigno', label: 'Nucleico benigno'},
+    { value: 'Saiyan', label: 'Saiyan', color: 'bg-orange-500'},
+    { value: 'Namekian', label: 'Namekian', color: 'bg-green-500'},
+    { value: 'Human', label: 'Humano', color: 'bg-red-500'},
+    { value: 'Majin', label: 'Majin', color: 'bg-rose-500'},
+    { value: 'Frieza Race', label: 'Frieza Race', color: 'bg-fuchsia-500'},
+    { value: 'Jiren Race', label: 'Jiren Race', color: 'bg-pink-500'},
+    { value: 'Android', label: 'Android', color: 'bg-purple-500'},
+    { value: 'God', label: 'God', color: 'bg-indigo-500'},
+    { value: 'Angel', label: 'Angel', color: 'bg-lime-500'},
+    { value: 'Evil', label: 'Evil', color: 'bg-amber-800'},
+    { value: 'Unknown', label: 'Unknown', color: 'bg-violet-400'},
+    { value: 'Nucleico benigno', label: 'Nucleico benigno', color: 'bg-teal-500'},
 
 ];
 

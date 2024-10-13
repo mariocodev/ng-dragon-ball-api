@@ -1,6 +1,7 @@
 export interface FilterResponse {
     value:  string;
     label:  string;
+    color?:  string;
 }
 export interface Character {
     id: number;

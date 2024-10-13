@@ -381,51 +381,66 @@
                 </div>
             } @else {
                 <div class="relative mx-auto w-full" *ngFor="let character of characters">
-                    <a (click)="setCharacterById(character.id)" class="relative inline-block duration-300 ease-in-out transition-transform transform hover:-translate-y-2 w-full">
+                    <a (click)="setCharacterById(character.id)" class="relative inline-block duration-300 ease-in-out transition-transform transform hover:-translate-y-2 w-full cursor-pointer">
                         <div class="shadow p-4 rounded-lg bg-white dark:bg-opacity-5">
-                            <div class="flex justify-center relative rounded-lg h-52">
-                                <div class="flex justify-center transition-transform duration-500 transform ease-in-out hover:scale-110 w-full">
-                                    <div class="absolute inset-0 bg-black opacity-10 bg-gradient-to-r" 
-                                        [ngClass]=" {'from-cyan-500 to-blue-500': character.gender === 'Male', 'from-purple-500 to-pink-500' : character.gender === 'Female' } "></div>
-                                    <img src="{{character.image}}" alt="{{character.image}}" style="height: 250px;top: -20px;" class="bg-inherit object-top object-contain absolute h-[250px]">
+                            
+                            <div class="flex justify-center relative rounded-lg h-52" [ngClass]="getColorRace(character.race)">
+                                <div class="flex justify-center transition-transform duration-500 ease-in-out w-full relative group">
+                                    <div class="absolute inset-0 w-full overflow-hidden backdrop-brightness-200">
+                                        <svg class="relative inset-0 bg-black opacity-10 bg-gradient-to-r" viewBox="0 0 375 283" fill="none" style="transform: scale(1.5); opacity: 0.1;">
+                                            <rect x="159.52" y="175" width="152" height="152" rx="8" transform="rotate(-45 159.52 175)" fill="white"/>
+                                            <rect y="107.48" width="152" height="152" rx="8" transform="rotate(-45 0 107.48)" fill="white"/>
+                                        </svg>
+                                    </div>
+                                    <img src="{{character.image}}" alt="{{character.image}}" class="bg-inherit object-top object-contain absolute h-[250px] drop-shadow-md transition-transform duration-300 group-hover:scale-110">
                                 </div>
                     
                                 <div class="absolute flex justify-center bottom-0 mb-1">
-                                    <div class="flex bg-white px-4 py-1 space-x-5 rounded-lg overflow-hidden shadow text-sm">
-                                        <p class="flex items-center font-bold " 
-                                            [ngClass]=" {'text-blue-800': character.gender === 'Male', 'text-rose-500' : character.gender === 'Female' }">
-                                            <i class="bi " [ngClass]=" 'bi-gender-'+character.gender | lowercase "></i>
-                                        </p>
-                        
-                                        <p class="flex items-center font-medium text-gray-800">
-                                            {{character.affiliation}}
+                                    <div class="flex px-4 py-1 space-x-5 rounded-lg overflow-hidden shadow text-sm text-white"
+                                    [ngClass]=" {'bg-blue-500': character.gender === 'Male', 'bg-pink-600' : character.gender === 'Female' }">
+                                        <p class="flex items-center font-bold">
+                                            <i class="shadow bi " [ngClass]=" 'bi-gender-'+character.gender | lowercase "></i>
                                         </p>
                                     </div>
                                 </div>
-                    
-                                <span class="absolute -top-5 left-0 inline-flex -mt-2 px-2 py-1 rounded-lg z-10 bg-red-500 text-sm font-medium text-white select-none">{{character.race}}
-                                </span>
                             </div>
                     
                             <div class="mt-4">
-                                <h2 class="font-medium text-base md:text-lg text-gray-800 line-clamp-1 dark:text-slate-50">
+                                <h2 class="font-semibold text-base md:text-lg text-gray-800 line-clamp-1 dark:text-slate-50">
                                     {{character.name}}
                                 </h2>
                                 <p class="mt-2 text-sm text-gray-800 line-clamp-3 text-pretty dark:text-slate-50">
                                     {{character.description}}
                                 </p>
-                            </div>
-                    
-                            <div class="grid grid-cols-2 grid-rows-1 gap-4 mt-8">
-                                
-                                <p *ngIf="character.ki !== '0' " class="inline-flex flex-col xl:flex-row xl:items-center text-gray-800 dark:text-gray-50">
-                                    <i class="text-xl inline-block w-5 mr-1 fill-current text-lime-800 bi bi-battery-half dark:text-lime-300"></i>
-                                    <span class="mt-2 xl:mt-0">{{character.ki}}</span>
-                                </p>
-                                <p *ngIf="character.maxKi !== '0' " class="inline-flex flex-col xl:flex-row xl:items-center text-gray-800 dark:text-gray-50">
-                                    <i class="text-xl inline-block w-5 mr-1 fill-current text-green-800 bi bi-battery-full dark:text-lime-300"></i>
-                                    <span class="mt-2 xl:mt-0">{{character.maxKi}}</span>
-                                </p>
+                                <hr class="mt-5">
+                                <ul class="max-w-xs flex flex-col divide-y divide-gray-200 dark:divide-neutral-700">
+                                    <li class="inline-flex items-center gap-x-2 py-3 text-sm font-medium text-gray-800 dark:text-white">
+                                        <div class="flex justify-between w-full">
+                                            Race
+                                            <span class="inline-flex items-center py-1 px-2 rounded-full text-xs font-medium text-white" [ngClass]="getColorRace(character.race)">{{character.race}}</span>
+                                        </div>
+                                    </li>
+                                    <li class="inline-flex items-center gap-x-2 py-3 text-sm font-medium text-gray-800 dark:text-white">
+                                        <div class="flex justify-between w-full">
+                                            Affiliation
+                                            <span class="inline-flex items-center py-1 px-2 rounded-full text-xs font-medium bg-blue-200 text-blue-900">{{character.affiliation}}</span>
+                                        </div>
+                                    </li>
+                                    <li *ngIf="character.ki !== '0' && character.ki !== character.maxKi" class="inline-flex items-center gap-x-2 py-3 text-sm font-medium text-gray-800 dark:text-white">
+                                        <div class="flex justify-between w-full">
+                                            Base Ki
+                                            <i class="text-xl w-5 mr-1 fill-current text-lime-800 bi bi-battery-half dark:text-lime-300"></i>
+                                            <span class="inline-flex items-center py-1 px-2 rounded-full text-xs font-medium">{{character.ki}}</span>
+                                        </div>
+                                    </li>
+                                    <li *ngIf="character.maxKi !== '0' " class="inline-flex items-center gap-x-2 py-3 text-sm font-medium text-gray-800 dark:text-white">
+                                        <div class="flex justify-between w-full">
+                                            Total Ki
+                                            <i class="text-xl w-5 mr-1 fill-current text-green-800 bi bi-battery-full dark:text-lime-300"></i>
+                                            <span class="inline-flex items-center py-1 px-2 rounded-full text-xs font-medium">{{character.maxKi}}</span>
+                                        </div>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                     </a>
