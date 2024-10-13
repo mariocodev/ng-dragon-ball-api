@@ -7,13 +7,19 @@
 
 </div>
 
+Este proyecto es una aplicación Angular que consume una API de Dragon Ball ([https://web.dragonball-api.com](https://web.dragonball-api.com/)) para mostrar información sobre los personajes de esta franquicia. La aplicación permite a los usuarios filtrar personajes por nombre, género, raza y afiliación, y visualizar detalles específicos de cada personaje seleccionado en un modal. La interfaz de usuario es responsiva y admite un tema oscuro que se puede alternar manualmente por el usuario.
+
+
+La aplicación utiliza Angular como framework de desarrollo frontend, implementando formularios reactivos para la gestión de los filtros de búsqueda. La comunicación con la API se maneja a través de un servicio dedicado (DragonBallService), que realiza peticiones HTTP para obtener los datos de los personajes y maneja posibles errores en las respuestas.
+
+El proyecto está configurado para ser desplegado tanto en modo desarrollo como en producción, con instrucciones específicas para la instalación de dependencias, configuración de un proxy local para el desarrollo, y comandos para la compilación y despliegue de la aplicación. Además, se utiliza Tailwind CSS para el diseño y estilización de la interfaz, aprovechando su sistema de utilidades para un diseño rápido y eficiente.
+
+El código fuente incluye componentes Angular específicos para la visualización de los personajes y sus detalles, así como la configuración necesaria para el manejo de temas oscuros y claros, basado en las preferencias del sistema del usuario o una selección manual.
 
 ## Content
 
 1. [Features](#features)
 2. [Installation](#installation)
-
-Este proyecto es una prueba de concepto de uso de `Actions` a través de **Github Pages** desde un framework frontend, y utiliza el api de [https://web.dragonball-api.com](https://web.dragonball-api.com/) para desplegar una aplicación web con funcionalidades de filtrado.
 
 ## Features
 
@@ -27,7 +33,7 @@ El siguiente proyecto ha sido levantado en un entorno local con las siguientes c
 ### Entorno de desarrollo
 
 * Framework: [Angular ^18](https://angular.dev/)
-* Template: [Boostrap 5](https://fontawesome.com/v5/download)
+* Template: [Flowbite](https://flowbite.com) with  [TailwindCss](https://tailwindcss.com/)
 * Gestor de paquetes. [NPM](https://www.npmjs.com/)
 
 ```node
