@@ -93,6 +93,7 @@ Abrir el archivo `/frontend/proxy.config.example.json` y renombrarlo a `proxy.co
 }
 ```
 
+> [!IMPORTANT]
 > Para el despliegue en ambiente de `production` es importante tener el flag `{production:true}` en el archivo `environment.production.ts`
 
 **Instalación de `CLI `de angular**
@@ -122,7 +123,9 @@ Compilar el proyecto frontend para el ambiente seleccionado. Dentro del director
 
 Por ejemplo para un ambiente de pre-producción se debe crear el archivo `environment.staging.ts` basado en `environment.ts` y actualizar los valores.
 
+> [!NOTE]
 > Los ambientes predefinidos a través de variables son: development con `dev` para el archivo `development`, pre-producción con `uat` para el archivo `staging` y producción con `prod` para el archivo `production`. Por defecto se compila el ambiente `production` pero se recomienda usar la nomenclatura del comando de todas formas.
+
 
 ```sh
 
@@ -132,6 +135,7 @@ $ npm run build:uat --output-hashing=all
 # $ npm run build:prod
 
 ```
+> [!TIP]
 > `--output-hashing=all` borra/renueva el caché del proyecto
 
 ## FAQ
