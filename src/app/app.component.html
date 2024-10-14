@@ -393,10 +393,10 @@
                 </div>
             } @else {
                 <div class="relative mx-auto w-full" *ngFor="let character of characters">
-                    <a (click)="setCharacterById(character.id)" class="relative inline-block duration-300 ease-in-out transition-transform transform hover:-translate-y-2 w-full cursor-pointer">
+                    <a class="relative inline-block duration-300 ease-in-out transition-transform transform hover:-translate-y-2 w-full cursor-pointer">
                         <div class="shadow p-4 rounded-lg bg-white dark:bg-opacity-5">
                             
-                            <div class="flex justify-center relative rounded-lg h-52" [ngClass]="getColorRace(character.race)">
+                            <div class="flex justify-center relative rounded-lg h-52" [ngClass]="getColorRace(character.race)" (click)="setCharacterById(character.id)" >
                                 <div class="flex lg:justify-end justify-center transition-transform duration-500 ease-in-out w-full relative group">
                                     <div class="absolute inset-0 w-full overflow-hidden backdrop-brightness-200">
                                         <svg class="relative inset-0 bg-black opacity-10 bg-gradient-to-r" viewBox="0 0 375 283" fill="none" style="opacity: 0.2; height: 100%;width: inherit;">

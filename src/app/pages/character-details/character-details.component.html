@@ -17,12 +17,40 @@
 			</div>
 			<!-- Modal body -->
 			<div class="p-4 md:p-5 space-y-4">
-				<p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+				<!--p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
 					{{ character | json}}
-				</p>
+				</p>-->
+
+				<section class="bg-blueGray-200">
+					<div class="container mx-auto px-4">
+						<div class="flex flex-wrap items-center mt-16">
+							<div class="w-full md:w-8/12 px-4">
+								<h3 class="text-2xl mb-2 font-semibold leading-normal">Nombre del producto</h3>
+								<p class="text-sm font-light leading-relaxed mt-4 mb-4 text-blueGray-600">
+									{{character.description}}
+								</p>
+							</div>
+							<div class="w-full md:w-4/12 px-4">
+								<div class="relative flex flex-col min-w-0 break-words bg-pink-500 mb-2 shadow-lg rounded-lg">
+									<img alt="..." src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1051&q=80" class="w-full rounded-t-lg">
+									<blockquote class="relative p-8 mb-4 bg-pink-500">
+										<svg preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 583 95" class="absolute left-0 w-full block h-24 -top-24">
+											<polygon points="-30,95 583,95 583,65" class="text-pink-500 fill-current"></polygon>
+										</svg>
+										<h4 class="text-xl font-bold text-white">Top Notch Services</h4>
+										<p class="text-md font-light mt-2 text-white">
+											The Arctic Ocean freezes every winter and much of the sea-ice then thaws every summer, and that process will continue whatever happens.
+										</p>
+									</blockquote>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+				  
 				
 				<!-- transformaciones -->
-				<div class="bg-white dark:bg-transparent" style="margin-bottom: 5rem;" *ngIf="character.transformations && character.transformations.length > 0">
+				<div class="bg-white dark:bg-transparent" style="margin-bottom: 5rem;" *ngIf="!loading && character.transformations && character.transformations.length > 0">
 					<div class="mx-auto max-w-2xl lg:max-w-7xl">
 						<h2 class="dark:text-white text-cyan-950 py-6 my-10">Transformaciones</h2>
 						
@@ -56,18 +84,18 @@
 					</div>
 				</div>
 
-				<div class="my-10 flex flex-col md:flex-row bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
-					<img class="object-cover w-full h-full rounded-t-lg md:h-auto md:w-48 md:rounded-none md:rounded-l-lg" [src]="character.originPlanet?.image" [alt]="character.originPlanet?.name">
+				<div class="my-10 flex flex-col md:flex-row bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700" *ngIf="!loading && character.originPlanet">
+					<img class="object-cover w-full h-full rounded-t-lg md:h-auto md:w-48 md:rounded-none md:rounded-l-lg" [src]="character.originPlanet.image" [alt]="character.originPlanet.name">
 					<div class="flex flex-col justify-between p-4 leading-normal h-full">
 						<h5 class="mb-1 text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
-							{{character.originPlanet?.name}}							
+							{{character.originPlanet.name}}							
 							<span *ngIf="character.originPlanet?.isDestroyed" class="inline-flex items-center bg-red-100 text-red-800 text-xs font-medium px-2.5 py-0.5 rounded-full dark:bg-red-900 dark:text-red-300">
 								<span class="w-2 h-2 me-1 bg-red-500 rounded-full"></span>
 								Destroyed
 							</span>
 						</h5>
 						<p class="mb-2 text-sm font-medium text-gray-700 dark:text-gray-400 flex-grow">
-							{{character.originPlanet?.description}}
+							{{character.originPlanet.description}}
 						</p>
 					</div>
 				</div>			
