@@ -13,7 +13,7 @@
                 </button>
                 <a href="/" class="flex items-center justify-between mr-4">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/8/81/Dragon_Ball_Funimation_logo.svg" class="mr-3 h-8" alt="Dragón Ball Z API" />
-                    <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">API</span>
+                    <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white text-orange-500 drop-shadow-sm [text-shadow:_0_1px_2px_rgb(99_102_241_/_0.8)]">API</span>
                 </a>
                 
             </div>
@@ -138,8 +138,7 @@
                             class="inline-flex justify-center items-center w-5 h-5 text-xs font-semibold rounded-full text-primary-800 bg-primary-100 dark:bg-primary-200 dark:text-primary-800">{{races.length}}
                         </span>
                     </h3>
-                    <ul 
-                        class="w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg 
+                    <ul class="w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg 
                                 dark:bg-gray-700 dark:border-gray-600 dark:text-white space-y-2 px-2 mb-5"
                         >
                         <li 
@@ -161,6 +160,7 @@
                                 class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                             >
                                 {{ item.label }}
+                                <span class="size-2 inline-block bg-gray-800 rounded-full me-2 {{getColorRace(item.value)}}"></span>
                             </label>
                             </div>
                         </li>
@@ -324,12 +324,12 @@
                             <i class="bi bi-arrow-clockwise -ms-0.5 me-2 h-4 w-4" aria-hidden="true"></i> Reset Filter
                         </button>
                         <div>
-                            <ul class="flex w-full items-center rounded-lg border border-gray-200 bg-white text-sm font-medium text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-white">
+                            <ul class="flex w-full items-center rounded-lg border border-gray-200 bg-white text-sm font-medium text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-white h-9">
                                 <ng-container *ngFor="let limit of [4, 8, 16]">
-                                    <li class="w-full border-r border-gray-200 dark:border-gray-600" *ngIf="limit !== null">
+                                    <li class="w-full border-r border-gray-200 dark:border-gray-600 h-7" *ngIf="limit !== null">
                                         <div class="flex items-center pl-3">
                                             <input (click)="setLimit(limit)" id="condition{{limit}}" type="radio" value="" name="list-radio" [checked]="limit === itemsPerPage" class="h-4 w-4 border-gray-300 bg-gray-100 text-primary-600 focus:ring-primary=500 dark:border-gray=500 dark:bg-gray=600 dark:ring-offset=gray=700 dark:focus:ring-primary=600" />
-                                            <label [for]="'condition' + limit" class="mx-2 w-full py-3 text-sm font-medium text-gray=900 dark:text=gray=300">{{ limit }}</label>
+                                            <label [for]="'condition' + limit" class="mx-2 w-full py-1 text-sm font-medium text-gray=900 dark:text=gray=300">{{ limit }}</label>
                                         </div>
                                     </li>
                                 </ng-container>
@@ -358,7 +358,7 @@
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 w-full mb-3 p-4">
             @if (loading) {
-                <div class="relative mx-auto w-full" *ngFor="let i of [].constructor(2);">
+                <div class="relative mx-auto w-full" *ngFor="let i of [].constructor(4);">
                     <div class="relative inline-block duration-300 ease-in-out transition-transform transform w-full cursor-wait">
                         <div class="shadow p-4 rounded-lg bg-white dark:bg-opacity-5">
                             <div class="flex justify-center relative rounded-lg h-52">
@@ -397,9 +397,9 @@
                         <div class="shadow p-4 rounded-lg bg-white dark:bg-opacity-5">
                             
                             <div class="flex justify-center relative rounded-lg h-52" [ngClass]="getColorRace(character.race)">
-                                <div class="flex justify-end transition-transform duration-500 ease-in-out w-full relative group">
+                                <div class="flex lg:justify-end justify-center transition-transform duration-500 ease-in-out w-full relative group">
                                     <div class="absolute inset-0 w-full overflow-hidden backdrop-brightness-200">
-                                        <svg class="relative inset-0 bg-black opacity-10 bg-gradient-to-r" viewBox="0 0 375 283" fill="none" style="transform: scale(1.5); opacity: 0.1;height:100%">
+                                        <svg class="relative inset-0 bg-black opacity-10 bg-gradient-to-r" viewBox="0 0 375 283" fill="none" style="opacity: 0.2; height: 100%;width: inherit;">
                                             <rect x="159.52" y="175" width="152" height="152" rx="8" transform="rotate(-45 159.52 175)" fill="white"/>
                                             <rect y="107.48" width="152" height="152" rx="8" transform="rotate(-45 0 107.48)" fill="white"/>
                                         </svg>
@@ -416,16 +416,15 @@
                                     {{ character.gender === 'Male' ? 'bg-blue-100 dark:bg-blue-800' : 'bg-pink-100 dark:bg-pink-700' }}">
                                     <i class="shadow bi bi-gender-{{ character.gender | lowercase }}" 
                                     [ngClass]="{
-                                        'text-blue-500 dark:text-white': character.gender === 'Male', 
-                                        'text-pink-800 dark:text-white': character.gender === 'Female'
+                                        'text-blue-800 dark:text-blue-100': character.gender === 'Male', 
+                                        'text-pink-800 dark:text-pink-100': character.gender === 'Female'
                                     }"></i>
                                 </span>
 
                                 <p class="mt-2 text-sm text-gray-800 line-clamp-3 text-pretty dark:text-slate-50">
                                     {{character.description}}
                                 </p>
-                                <hr class="mt-5">
-                                <ul class="max-w-xs flex flex-col divide-y divide-gray-200 dark:divide-neutral-700">
+                                <ul class="w-full flex flex-col divide-y divide-gray-200 dark:divide-neutral-700 mt-5 border-t-2 border-slate-200">
                                     <li class="inline-flex items-center gap-x-2 py-3 text-sm font-medium text-gray-800 dark:text-white">
                                         <div class="flex justify-between w-full">
                                             Race
@@ -459,23 +458,38 @@
                 </div>  
         }
         </div>
-        <div class="flex justify-center my-10" *ngIf="characters.length > 0">
-
-            <!-- Previous Button -->
-            <button (click)="isFilter ? onPageChange(currentPage - 1) : goToPage(currentPage - 1)" [disabled]="currentPage === 1" 
-                class="flex items-center justify-center px-4 h-10 me-3 text-base font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-                <svg class="w-3.5 h-3.5 me-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5H1m0 0 4 4M1 5l4-4"/>
-                </svg>
-                Previous
-            </button>
-            <button (click)="isFilter ? onPageChange(currentPage + 1) : goToPage(currentPage + 1)" [disabled]="currentPage === totalPages" class="flex items-center justify-center px-4 h-10 text-base font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-                Next
-                <svg class="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
-                </svg>
-            </button>
-        </div>
+        <section class="w-full max-w-screen-xl px-4 mx-auto lg:px-3"  *ngIf="characters.length > 0">
+            <!-- Start coding here -->
+            <div class="relative overflow-hidden bg-white rounded-b-lg shadow-md dark:bg-gray-800 items-center">
+                <nav class="flex flex-col items-center justify-between p-4 space-y-3 md:flex-row md:items-center md:space-y-0 sm:flex-row sm:items-center sm:space-y-0"
+                    aria-label="Table navigation">
+                    <span class="text-sm font-normal text-gray-500 dark:text-gray-400">Registros:
+                        <span class="font-semibold text-gray-900 dark:text-white">{{itemCount}}</span> | Página  
+                        <span class="font-semibold text-gray-900 dark:text-white">{{currentPage}}</span> de 
+                        <span class="font-semibold text-gray-900 dark:text-white">{{totalPages}}</span> | Total ítem
+                        <span class="font-semibold text-gray-900 dark:text-white">{{totalItems}}</span>.
+                    </span>
+                    <div class="flex justify-center my-10">
+                        <!-- Previous Button -->
+                        <button (click)="isFilter ? onPageChange(currentPage - 1) : goToPage(currentPage - 1)" [disabled]="currentPage === 1" 
+                            class="flex items-center justify-center px-4 h-10 me-3 text-base font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                            <svg class="w-3.5 h-3.5 me-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5H1m0 0 4 4M1 5l4-4"/>
+                            </svg>
+                            Previous
+                        </button>
+                        <button (click)="isFilter ? onPageChange(currentPage + 1) : goToPage(currentPage + 1)" [disabled]="currentPage === totalPages" class="flex items-center justify-center px-4 h-10 text-base font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                            Next
+                            <svg class="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+                            </svg>
+                        </button>
+                    </div>
+                </nav>
+            </div>
+        </section>
+        
+        
 
         <!-- modal component -->
         <app-character-details [id]="characterId" [isOpen]="openModal" (closeModalEvent)="handleCloseModal()"></app-character-details>

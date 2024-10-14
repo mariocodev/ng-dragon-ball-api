@@ -6,7 +6,7 @@ export const GenderData = [
 export const RaceData = [
     { value: 'Saiyan', label: 'Saiyan', color: 'bg-orange-500'},
     { value: 'Namekian', label: 'Namekian', color: 'bg-green-500'},
-    { value: 'Human', label: 'Humano', color: 'bg-red-500'},
+    { value: 'Human', label: 'Human', color: 'bg-red-500'},
     { value: 'Majin', label: 'Majin', color: 'bg-rose-500'},
     { value: 'Frieza Race', label: 'Frieza Race', color: 'bg-fuchsia-500'},
     { value: 'Jiren Race', label: 'Jiren Race', color: 'bg-pink-500'},

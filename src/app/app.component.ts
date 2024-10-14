@@ -31,10 +31,13 @@ export class AppComponent implements OnInit {
 	totalPages: number = 0; // Total de páginas
 	currentPage: number = 1; // Para el seguimiento de la página actual
 	itemsPerPage: number = 8; // Elementos por página
+	totalItems: number = 0;
+	itemCount: number = 0;
 	isFilter: boolean = false;
 	openModal = false;
 	
 	isDarkMode = false;
+	
 
 	constructor(
 		private dragonBallService: DragonBallService,
@@ -70,7 +73,9 @@ export class AppComponent implements OnInit {
 				this.characters = response.items ?? [];
 				this.totalPages = response.meta.totalPages;
 				this.currentPage = response.meta.currentPage;
-				
+				this.totalItems = response.meta.totalItems;
+				this.itemCount = response.meta.itemCount;
+				console.log("totalPages : ", this.totalPages, " currentPage : ", this.currentPage, " totalItems : ", this.totalItems, " itemCount : ", this.itemCount, "  itemsPerpage : ", response.meta.itemsPerPage);
 				this.isFilter = false;
 				this.loading = false;
 			});
@@ -83,10 +88,15 @@ export class AppComponent implements OnInit {
 		this.dragonBallService.getCharactersByFilter(1, this.itemsPerPage, name, gender, race, affiliation)
 			.subscribe((response: Character[]) => {
 				this.charactersFilter = response ?? [];
-				this.totalPages = Math.ceil(this.charactersFilter.length / this.itemsPerPage);
-				console.log("totalPages:", this.totalPages)
+				this.totalItems = this.charactersFilter.length;
+				this.totalPages = Math.ceil(this.totalItems / this.itemsPerPage);
 				this.currentPage = 1;
+				this.itemCount = (this.currentPage === this.totalPages && this.totalItems % this.itemsPerPage !== 0) 
+					? this.totalItems % this.itemsPerPage // Muestra el resto en la última página si no es múltiplo de itemsPerPage
+					: this.itemsPerPage; // Muestra el total de itemsPerPage si está completa la página
+
 				this.updateDisplayedCharacters();
+				console.log("totalPages : ", this.totalPages, " currentPage : ", this.currentPage, " totalItems : ", this.totalItems, " itemCount : ", this.itemCount, "  itemsPerpage : ", this.itemsPerPage);
 				this.isFilter = true;
 				this.loading = false;
 			});
@@ -98,8 +108,9 @@ export class AppComponent implements OnInit {
 	}
 
 	setLimit(limit: number): void {
+		const { name, gender, race, affiliation } = this.searchForm.value;
 		this.itemsPerPage = limit;
-		this.onLoad();
+		this.isFilter ? this.updateDisplayedCharacters() : this.onLoad();
 	}
 
 	setCharacterById(id: number): void{
@@ -118,6 +129,7 @@ export class AppComponent implements OnInit {
 		const endIndex = startIndex + this.itemsPerPage;
 		console.log("startIndex: ", startIndex, " - endIndex: ", endIndex);
 		this.characters = this.charactersFilter.slice(startIndex, endIndex);
+		this.itemCount = this.characters.length;
 		console.log("this.displayedCharacter: ", this.characters);
 	}
 
@@ -135,7 +147,7 @@ export class AppComponent implements OnInit {
 	}
 
 	onLoad(): void {
-		this.onLoadCharacters(this.currentPage);
+		this.onLoadCharacters(this.currentPage)
 	}
 
 	resetForm(): void {
