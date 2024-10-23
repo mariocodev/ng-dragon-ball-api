@@ -77,7 +77,7 @@ Esto instalará `Node.js` en la versión 22.9.0 y también configurará la versi
 
 **Configurar proxy local**
 
-Abrir el archivo `/frontend/proxy.config.example.json` y renombrarlo a `proxy.config.json`. Modificar los valores del target para acceso al backend.
+Abrir el archivo `proxy.config.example.json` y renombrarlo a `proxy.config.json`. Modificar los valores del target para acceso al backend.
 
 ```json
 {
